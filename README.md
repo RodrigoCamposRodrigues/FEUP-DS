@@ -1,48 +1,83 @@
-# Hero Alliance: Cloud Infrastructure Quickstart
+# AI4SD: AI for Software Development
 
-## Step-by-step guide
+## Project Overview
 
-1. **Ask your professor for a JSON key** for your specific superhero
-2. Once you get the key, you can use it on your code files (just be sure to not store it in the repository: save it as a secret, do not leave it publicly accessible). Authenticate with `gcloud auth activate-service-account --key-file=superhero-0Y-0Y.json`
-3. In order to deploy your code to the cloud, you simply create a branch from main, make a Pull Request with the changes you have in mind, and, if/when it gets accepted and merged, a pipeline will be triggered
+AI4SD (AI for Software Development) is an innovative large-scale project developed as part of the DSLE 2024-25 course that explores how artificial intelligence can enhance the software development lifecycle (SDLC). With over 150 participants, this collaborative multi-team project simulates real-world enterprise software development environments and challenges.
 
-## Important remarks
-- **The pipeline will only work for superheroes if you comply with the following conditions**:
-    - You must respect the structure of the AI4SD repository. That means the root of the repository should look like this:
-        - `avengers/`
-        - `x-men/`
-        - `superheroes/`
-            - `superhero-01-01/`
-            - `superhero-01-02/`
-            - ...
-        - `strange/`
-        - `jarvis/`
-        - `infrastructure/`
-            - `pipeline`
-            - `terraform`
-    - So, if, for instance, you are working on superhero-01-02, put that code inside the respective file. **If you don't respect this hierarchy, your changes won't be picked up by the pipeline**
-    - In order for the pipeline to update your superhero, **it must have a Dockerfile in its root path**. For the example above, the path would be `superheroes/superhero-01-02/Dockerfile`
-    - Additionally, **inside the avengers/ folder, you must have an index.html file. Otherwise, your web app will not be visible in its public link**
-- The pipeline is responsible for building, pushing, and deploying a docker image of your superhero to the cloud. This is an entirely automated process, so there is no need to run any commands in a CLI
-- If you have not yet created your repository, then an example `hello-world` image will be used for all cloud run instances. Only when you follow all of the above instructions will you be able to have the cloud update your superhero
-- **Regarding X-Men, it will not be deployed in the cloud**, as it is a VS Code extension. However, you may extend the existing pipeline with building and publication automations if you so desire. The best way to automate that process is up to you to decide
-- You have at your availability the following resources:
-    - **avengers** cloud storage bucket: the web app of AI4SD *(up to you to develop)*
-        - This is not a VM but a data container. Because you will be using ReactJS to develop the frontend of the app, its output are just static files. Thus, this is a cost effective approach for maintaining a frontend.
-    - **superhero-0X-0Y** cloud run instance: your superhero service powered by GenAI capabilities *(up to you to develop by us)*
-        - The service account name of your superhero follows the format `superhero-0X-0Y@hero-alliance-feup-ds-24-25.iam.gserviceaccount.com    `
-    - **nexus** cloud storage bucket: a data bucket that will hold the repositories your superhero will use *(already deployed by us)*
-        - We recommend creating one folder per superhero. Inside that folder you can put whatever you want there
-    - **vault** firestore: data storage for holding information specific to your superhero (internally it is mandatory that it is referred by GCP as `(default)`) *(already deployed by us)*
-        - Again, we recommend one collection per superhero
-    - **strange** cloud run instance: a service for orchestrating superhero execution *(up to you to develop by us)*
-        - The service account name of strange follows the format `hero-alliance-strange@hero-alliance-feup-ds-24-25.iam.gserviceaccount.com`
-    - **jarvis** cloud run instance: a service for synchronizing the contents of **nexus** with GitHub *(already deployed by us)*
-        - The service account name of jarvis follows the format `hero-alliance-jarvis@hero-alliance-feup-ds-24-25.iam.gserviceaccount.com`
-    - **echo-jarvis** pub/sub: a communication channel that allows **jarvis** to let superheroes know there are updates in repositories held in **nexus** *(already deployed by us)*
-    - **echo-superheroes** pub/sub: same as above, but for **superheroes** to communicate with each other *(already deployed by us)*
-- **Virtual Machine (optional - for Avengers)**: if you are having problems with deployment, you may use the new virtual machine for the avengers. This should allow you to deploy the web application if you are struggling with using the storage bucket. To do so, you need to login using the monitoring account with `gcloud auth login` (check Discord for the credentials: [here](https://discordapp.com/channels/1305936467113021513/1305936467113021517/1318285302367912017)) and the private key (also on Discord, [here](https://discordapp.com/channels/1305936467113021513/1305936467113021517/1318308647855456307)). Use this command to access the virtual machine after authenticating: `gcloud compute ssh --zone "europe-west1-d" "avengers-vm" --project "hero-alliance-feup-ds-24-25" --ssh-key-file=[private key]`
+Our primary goal is to create a cohesive ecosystem of AI-powered tools and assistants that support software developers throughout the entire development process, making it more efficient, effective, and streamlined. The scale of this project, with its numerous participants across multiple teams, provides students with authentic experience in large-scale software engineering practices.
 
-## Public superhero links
-- **avengers**: https://storage.googleapis.com/hero-alliance-avengers/index.html
-- **superhero-0X-0Y**: https://superhero-0X-0Y-150699885662.europe-west1.run.app
+Our project envisions a future where AI becomes an integral part of software development practices, augmenting human capabilities rather than replacing them. By leveraging state-of-the-art AI technologies, we're building specialized assistants that address specific aspects of the SDLC while ensuring they work together as a unified system.
+
+## Project Goals
+
+- Research and identify proven AI approaches applicable to software development
+- Design and implement specialized AI assistants for different stages of the SDLC
+- Integrate these assistants into a coherent ecosystem
+- Demonstrate practical applications in an Agile development context
+- Focus on creating minimal yet effective tools that provide real value
+- Gain experience in large-scale, multi-team software engineering
+- Learn to coordinate and communicate effectively across numerous teams
+
+## Enterprise-Scale Collaboration
+
+With 150+ participants working across multiple teams, this project deliberately simulates the complexity and coordination challenges found in enterprise software development. Students will experience:
+
+- Cross-team communication and dependency management
+- Large-scale version control and branching strategies
+- Integration of components developed by diverse teams
+- Decision-making processes in complex organizational structures
+- Documentation and knowledge sharing across a large organization
+
+## Team Structure
+
+The project is divided into specialized focus areas, with different classes forming teams to address specific aspects of the SDLC:
+
+1. **AI for Requirements Engineering**
+   - Supervised by: Daniel Pinho
+   - Classes: 1MEIC03 and 1MEIC04
+   - Focus: Enhancing requirements gathering, analysis, and management using AI
+
+2. **AI for Architecture and Design**
+   - Supervised by: Carlos Duarte
+   - Classes: 1MEIC02 and 1MEIC06
+   - Focus: Supporting software architecture decisions and design processes
+
+3. **AI for Verification & Validation**
+   - Supervised by: Mateus Silva
+   - Classes: 1MEIC01 and 1MEIC07
+   - Focus: Improving testing, verification, and validation activities
+
+4. **AI for Coding, Refactoring, Agile, Management, and more**
+   - Supervised by: Ademar Aguiar
+   - Classes: 1MEIC05 and 1MEIC08
+   - Focus: Enhancing coding practices, supporting refactoring, and facilitating Agile methodologies
+
+## Collaborative Approach
+
+What makes this project unique is its collaborative nature at a massive scale. While teams focus on developing specific assistants or tools, all 150+ participants work together to:
+
+- Co-architect the overall system
+- Design interoperable components
+- Build individual modules that fit into the larger ecosystem
+- Deploy and operate the integrated system
+- Ensure consistent user experience across tools
+- Manage the complexity of large-scale software development
+
+## Technical Focus
+
+The project emphasizes:
+- Contemporary technologies (containers, messaging, microservices)
+- Agile software development practices at scale
+- From user stories to acceptance tests
+- Continuous integration and delivery pipelines
+- Integration of AI capabilities into development workflows
+- DevOps practices for large-scale systems
+
+## Project Organization
+
+The project uses a multi-level organizational structure to manage its scale:
+- **Executive Team**: Coordinates across all focus areas
+- **Focus Area Leads**: Manage specific SDLC domains
+- **Team Leads**: Coordinate individual teams within focus areas
+- **Integration Teams**: Ensure cohesion across components
+- **Documentation Teams**: Maintain comprehensive documentation
