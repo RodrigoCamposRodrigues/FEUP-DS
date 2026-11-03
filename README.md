@@ -1,5 +1,11 @@
 # AI4SD: AI for Software Development
 
+## My team's assistant: req2test
+
+I was part of team 01-03 in the **AI for Verification & Validation** area. We built **req2test**, an assistant that turns a software requirement into Gherkin acceptance tests (Given-When-Then) with Gemini 1.5 Flash, and explains each scenario. It has a FastAPI backend that keeps chat history in Firestore, and a page in the shared Next.js web app.
+
+Code: [`superheroes/superhero-01-03/`](superheroes/superhero-01-03/) (backend) · [`avengers/frontend/webapp/src/app/assistants/req2test/`](avengers/frontend/webapp/src/app/assistants/req2test/) (frontend)
+
 ## Project Overview
 
 AI4SD (AI for Software Development) is an innovative large-scale project developed as part of the DSLE 2024-25 course that explores how artificial intelligence can enhance the software development lifecycle (SDLC). With over 150 participants, this collaborative multi-team project simulates real-world enterprise software development environments and challenges.
